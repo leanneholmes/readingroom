@@ -46,9 +46,10 @@ npm start
 
 ## Help
 
-Any advise for common problems or issues.
+If you encounter problems on the server side, try to run the following commands from the project level directory /readingroom
 ```
-command to run if program contains helper info
+dotnet restore
+dotnet build
 ```
 
 ## Authors
