@@ -1,6 +1,6 @@
 # Reading Room
 
-Simple overview of use/purpose.
+An application where users can join or create book clubs.
 
 ## Description
 
