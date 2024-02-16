@@ -19,7 +19,7 @@ An in-depth paragraph about your project and overview of use.
 ### Installing
 
 * How/where to download your program
-* Any modifications needed to be made to files/folders
+* Any modifications needed to be made to files/folders (.env files will need to be included here)
 
 ### Executing program
 
