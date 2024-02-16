@@ -29,4 +29,9 @@ export default class BookClubStore {
   setLoadingInitial = (state: boolean) => {
     this.loadingInitial = state;
   };
+
+  createBookClub = async (bookClub: BookClub) => {
+    this.loading = true;
+    
+  };
 }
