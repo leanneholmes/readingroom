@@ -33,8 +33,9 @@ cd API
 dotnet watch --no-hot-reload
 ```
 
-* Start the client in a separate terminal
+* In a separate terminal, start the client
 ```
+cd ..
 cd client
 npm install
 npm start
