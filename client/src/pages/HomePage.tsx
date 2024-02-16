@@ -1,33 +1,24 @@
-import { useEffect, useState } from "react";
-import { Button, Container } from "semantic-ui-react";
-import { BookClub } from "../models/bookclub";
-import agent from "../utils/agent";
+import { useEffect } from "react";
+import { Container } from "semantic-ui-react";
 import BookClubList from "../components/BookClubList";
 import LoadingComponent from "../components/LoadingComponent";
+import { useStore } from "../stores/store";
+import { observer } from "mobx-react-lite";
 
 function HomePage() {
-  const [bookClubs, setBookClubs] = useState<BookClub[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { bookClubStore } = useStore();
 
   useEffect(() => {
-    agent.BookClubs.list().then((response) => {
-      let bookClubs: BookClub[] = [];
-      response.forEach((bookClub) => {
-        bookClub.nextMeeting = bookClub.nextMeeting.split("T")[0];
-        bookClubs.push(bookClub);
-      });
-      setBookClubs(bookClubs);
-      setLoading(false);
-    });
-  }, []);
+    bookClubStore.loadBookClubs();
+  }, [bookClubStore]);
 
-  if (loading) return <LoadingComponent />;
+  if (bookClubStore.loadingInitial) return <LoadingComponent />;
   return (
     <Container style={{ marginTop: "6em" }}>
       <h1>Homepage</h1>
-      <BookClubList bookClubs={bookClubs} />
+      <BookClubList bookClubs={bookClubStore.bookClubs} />
     </Container>
   );
 }
 
-export default HomePage;
+export default observer(HomePage);
