@@ -17,7 +17,7 @@ export default function BookClubList({ bookClubs }: Props) {
   return (
     <Grid divided="vertically">
       {bookClubs.map((bookclub) => (
-        <GridRow>
+        <GridRow key={bookclub.id}>
           <GridColumn width={3}>
             <Image
               src="https://react.semantic-ui.com/images/wireframe/image.png"
@@ -30,7 +30,13 @@ export default function BookClubList({ bookClubs }: Props) {
                 <Item.Header>
                   <Header size="medium">{bookclub.name}</Header>
                 </Item.Header>
-                <Item.Description>{bookclub.description}</Item.Description>
+                <Item.Description>
+                  <div>{bookclub.description}</div>
+                  <div>
+                    Current Book: {bookclub.currentBook} by{" "}
+                    {bookclub.currentBookAuthor}
+                  </div>
+                </Item.Description>
                 <Item.Extra style={{ marginTop: "60px" }}>
                   <Button
                     floated="left"
