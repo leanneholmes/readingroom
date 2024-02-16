@@ -10,9 +10,10 @@ An in-depth paragraph about your project and overview of use.
 
 ### Dependencies
 
-* Install the .NET 7.0 SDK from here:
+* Install the .NET 7.0 SDK
   - https://dotnet.microsoft.com/en-us/download/dotnet/7.0 
 * Node 16.0 or higher
+  - https://nodejs.org/en
 
 ### Installing
 
