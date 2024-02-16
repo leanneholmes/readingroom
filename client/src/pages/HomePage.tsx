@@ -3,12 +3,11 @@ import { Button, Container } from "semantic-ui-react";
 import { BookClub } from "../models/bookclub";
 import agent from "../utils/agent";
 import BookClubList from "../components/BookClubList";
-import { useStore } from "../stores/store";
-import { observer } from "mobx-react-lite";
+import LoadingComponent from "../components/LoadingComponent";
 
 function HomePage() {
-  const { bookClubStore } = useStore();
   const [bookClubs, setBookClubs] = useState<BookClub[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     agent.BookClubs.list().then((response) => {
@@ -18,8 +17,11 @@ function HomePage() {
         bookClubs.push(bookClub);
       });
       setBookClubs(bookClubs);
+      setLoading(false);
     });
   }, []);
+
+  if (loading) return <LoadingComponent />;
   return (
     <Container style={{ marginTop: "6em" }}>
       <h1>Homepage</h1>
@@ -28,4 +30,4 @@ function HomePage() {
   );
 }
 
-export default observer(HomePage);
+export default HomePage;
