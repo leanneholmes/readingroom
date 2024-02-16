@@ -20,7 +20,7 @@ An in-depth paragraph about your project and overview of use.
 
 ### Executing program
 
-* How to run the program
+These instructions are for running the program locally.
 * Start the API server
 ```
 cd API
