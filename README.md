@@ -36,7 +36,7 @@ cd API
 dotnet watch --no-hot-reload
 ```
 
-* In a separate terminal, start the client
+* In a separate terminal, navigate to the client folder and start the client
 ```
 cd ..
 cd client
