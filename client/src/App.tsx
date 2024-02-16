@@ -1,26 +1,33 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import axios from "axios";
-import { Header, List } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
+import { BookClub } from "./models/bookclub";
+import NavBar from "./components/NavBar";
+import BookClubList from "./components/BookClubList";
+import agent from "./utils/agent";
+import CreateBookClub from "./pages/CreateBookClub";
 
 function App() {
-  const [bookClubs, setBookClubs] = useState([]);
+  const [bookClubs, setBookClubs] = useState<BookClub[]>([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/bookclubs").then((response) => {
-      setBookClubs(response.data);
+    agent.BookClubs.list().then((response) => {
+      let bookClubs: BookClub[] = [];
+      response.forEach((bookClub) => {
+        bookClub.nextMeeting = bookClub.nextMeeting.split("T")[0];
+        bookClubs.push(bookClub);
+      });
+      setBookClubs(bookClubs);
     });
   }, []);
 
   return (
-    <div>
-      <Header as="h2" icon="book" content="Reading Room"></Header>
-      <ul>
-        {bookClubs.map((bookclub: any) => (
-          <List.Item key={bookclub.id}>{bookclub.name}</List.Item>
-        ))}
-      </ul>
-    </div>
+    <>
+      <NavBar />
+      <Container style={{ marginTop: "6em" }}>
+        <BookClubList bookClubs={bookClubs} />
+        <CreateBookClub />
+      </Container>
+    </>
   );
 }
 
