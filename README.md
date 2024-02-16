@@ -21,6 +21,12 @@ An in-depth paragraph about your project and overview of use.
 ### Executing program
 
 These instructions are for running the program locally.
+* Clone the repo and cd into the project folder
+```
+git clone https://github.com/leanneholmes/readingroom.git
+cd readingroom
+```
+
 * Start the API server
 ```
 cd API
