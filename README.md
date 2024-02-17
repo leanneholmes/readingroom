@@ -28,6 +28,7 @@ These instructions are for running the program locally.
 ```
 git clone https://github.com/leanneholmes/readingroom.git
 cd readingroom
+dotnet build
 ```
 
 * Start the API server
