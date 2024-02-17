@@ -8,6 +8,7 @@ import {
   Header,
 } from "semantic-ui-react";
 import { BookClub } from "../models/bookclub";
+import { Link } from "react-router-dom";
 
 interface Props {
   bookClubs: BookClub[];
@@ -48,7 +49,13 @@ export default function BookClubList({ bookClubs }: Props) {
                     content={bookclub.readingPace}
                     color="purple"
                   />
-                  <Button floated="right" content="View Club" color="blue" />
+                  <Button
+                    as={Link}
+                    to={`/bookclub/${bookclub.id}`}
+                    floated="right"
+                    content="View Club"
+                    color="blue"
+                  />
                 </Item.Extra>
               </Item.Content>
             </Item>

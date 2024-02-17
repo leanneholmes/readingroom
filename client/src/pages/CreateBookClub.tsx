@@ -2,10 +2,12 @@ import { observer } from "mobx-react-lite";
 import { ChangeEvent, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 import { useStore } from "../stores/store";
+import { useNavigate } from "react-router";
 
 export default observer(function CreateBookClub() {
   const { bookClubStore } = useStore();
   const { createBookClub, loading } = bookClubStore;
+  const navigate = useNavigate();
 
   const initialState = {
     id: "",
@@ -23,6 +25,7 @@ export default observer(function CreateBookClub() {
 
   function handleSubmit() {
     createBookClub(bookClub);
+    navigate("/");
   }
 
   function handleInputChange(

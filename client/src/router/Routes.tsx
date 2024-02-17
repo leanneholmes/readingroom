@@ -3,6 +3,7 @@ import App from "../App";
 import HomePage from "../pages/HomePage";
 import CreateBookClub from "../pages/CreateBookClub";
 import MyClubs from "../pages/MyClubs";
+import BookClubDetails from "../pages/BookClubDetails";
 
 export const routes: RouteObject[] = [
   {
@@ -12,6 +13,7 @@ export const routes: RouteObject[] = [
       { path: "", index: true, element: <HomePage /> },
       { path: "/create", element: <CreateBookClub /> },
       { path: "/myclubs", element: <MyClubs /> },
+      { path: "/bookclub/:id", element: <BookClubDetails /> },
     ],
   },
 ];

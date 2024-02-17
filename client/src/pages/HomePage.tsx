@@ -7,6 +7,7 @@ import { observer } from "mobx-react-lite";
 
 function HomePage() {
   const { bookClubStore } = useStore();
+  const { bookClubsAsMap } = bookClubStore;
 
   useEffect(() => {
     bookClubStore.bookClubs = [];
@@ -16,8 +17,8 @@ function HomePage() {
   if (bookClubStore.loadingInitial) return <LoadingComponent />;
   return (
     <Container style={{ marginTop: "6em" }}>
-      <h1>Browse for Book Clubs</h1>
-      <BookClubList bookClubs={bookClubStore.bookClubs} />
+      <h1>Book Clubs</h1>
+      <BookClubList bookClubs={bookClubsAsMap} />
     </Container>
   );
 }
