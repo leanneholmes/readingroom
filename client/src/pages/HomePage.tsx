@@ -9,13 +9,14 @@ function HomePage() {
   const { bookClubStore } = useStore();
 
   useEffect(() => {
+    bookClubStore.bookClubs = [];
     bookClubStore.loadBookClubs();
   }, [bookClubStore]);
 
   if (bookClubStore.loadingInitial) return <LoadingComponent />;
   return (
     <Container style={{ marginTop: "6em" }}>
-      <h1>Homepage</h1>
+      <h1>Browse for Book Clubs</h1>
       <BookClubList bookClubs={bookClubStore.bookClubs} />
     </Container>
   );
