@@ -13,6 +13,11 @@ export default function NavBar() {
         name="View Book Clubs"
       ></Menu.Item>
       <Menu.Item as={NavLink} to="/create" name="Create a Club"></Menu.Item>
+      <Menu.Item
+        as={NavLink}
+        to="/errors"
+        name="Test Client Errors"
+      ></Menu.Item>
       <MenuMenu position="right">
         <Menu.Item as={NavLink} to="/" name="Logout"></Menu.Item>
       </MenuMenu>

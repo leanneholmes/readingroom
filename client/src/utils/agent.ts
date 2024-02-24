@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { BookClub } from "../models/bookclub";
+import { toast } from "react-toastify";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -9,22 +10,41 @@ const sleep = (delay: number) => {
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
-axios.interceptors.response.use(async (response) => {
-  try {
+axios.interceptors.response.use(
+  async (response) => {
     await sleep(500);
     return response;
-  } catch (error) {
-    console.log(error);
-    return await Promise.reject(error);
+  },
+  (error: AxiosError) => {
+    const { data, status } = error.response!;
+    switch (status) {
+      case 400:
+        toast.error("Bad request");
+        break;
+      case 401:
+        toast.error("Unauthorized");
+        break;
+      case 403:
+        toast.error("Forbidden");
+        break;
+      case 404:
+        toast.error("Not found");
+        break;
+      case 500:
+        toast.error("Server error");
+        break;
+    }
+    return Promise.reject(error);
   }
-});
+);
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
 const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
-  post: <T>(url: string, body: {}) => axios.post<T>(url).then(responseBody),
-  put: <T>(url: string, body: {}) => axios.put<T>(url).then(responseBody),
+  post: <T>(url: string, body: {}) =>
+    axios.post<T>(url, body).then(responseBody),
+  put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
   delete: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 };
 

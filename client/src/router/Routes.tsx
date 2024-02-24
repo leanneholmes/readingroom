@@ -4,6 +4,7 @@ import MyClubs from "../pages/MyClubs";
 import BookClubDetails from "../pages/BookClubDetails";
 import BookClubForm from "../pages/BookClubForm";
 import BookClubs from "../pages/BookClubs";
+import TestErrors from "../components/TestErrors";
 
 export const routes: RouteObject[] = [
   {
@@ -15,6 +16,7 @@ export const routes: RouteObject[] = [
       { path: "/myclubs", element: <MyClubs /> },
       { path: "/bookclub/:id", element: <BookClubDetails /> },
       { path: "/edit/:id", element: <BookClubForm key="edit" /> },
+      { path: "/errors", element: <TestErrors /> },
     ],
   },
 ];
