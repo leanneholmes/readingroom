@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 import { BookClub } from "../models/bookclub";
 import LoadingComponent from "../components/LoadingComponent";
+import { v4 as uuid } from "uuid";
 
 export default observer(function CreateBookClub() {
   const { bookClubStore } = useStore();
@@ -37,8 +38,12 @@ export default observer(function CreateBookClub() {
   }, [id, loadBookClub]);
 
   function handleSubmit() {
-    bookClub.id ? updateBookClub(bookClub) : createBookClub(bookClub);
-    navigate("/");
+    if (!bookClub.id) {
+      bookClub.id = uuid();
+      createBookClub(bookClub).then(() => navigate(`/bookclub/${bookClub.id}`));
+    } else {
+      updateBookClub(bookClub).then(() => navigate(`/bookclub/${bookClub.id}`));
+    }
   }
 
   function handleInputChange(
@@ -111,7 +116,7 @@ export default observer(function CreateBookClub() {
           value={bookClub.currentBookAuthor}
           onChange={handleInputChange}
         />
-        
+
         <Button
           loading={loading}
           floated="right"
