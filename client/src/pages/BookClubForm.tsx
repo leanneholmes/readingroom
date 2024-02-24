@@ -1,19 +1,20 @@
 import { observer } from "mobx-react-lite";
-import { ChangeEvent, useEffect, useState } from "react";
-import { Button, FormField, Header, Label, Segment } from "semantic-ui-react";
+import { useEffect, useState } from "react";
+import { Button, Header, Segment } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
 import { BookClub } from "../models/bookclub";
 import LoadingComponent from "../components/LoadingComponent";
 import { v4 as uuid } from "uuid";
-import { Formik, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import CustomTextInput from "../components/form/CustomTextInput";
 import CustomTextArea from "../components/form/CustomTextArea";
 import CustomSelectInput from "../components/form/CustomSelectInput";
 import { categoryOptions } from "../options/CategoryOptions";
 import { readingPaceOptions } from "../options/ReadingPaceOptions";
+import CustomDateInput from "../components/form/CustomDateInput";
 
 export default observer(function CreateBookClub() {
   const { bookClubStore } = useStore();
@@ -33,7 +34,7 @@ export default observer(function CreateBookClub() {
     description: "",
     category: "",
     readingPace: "",
-    nextMeeting: "",
+    nextMeeting: null,
     meetingLink: "",
     currentBook: "",
     currentBookAuthor: "",
@@ -44,7 +45,7 @@ export default observer(function CreateBookClub() {
     description: Yup.string().required("The book club description is required"),
     category: Yup.string().required("Club category is required"),
     readingPace: Yup.string().required("Reading pace is required"),
-    nextMeeting: Yup.string().required("Meeting date is required"),
+    nextMeeting: Yup.string().required("Meeting date is required").nullable(),
     meetingLink: Yup.string().required("A meeting link is required"),
     currentBook: Yup.string().required("Current book is required"),
     currentBookAuthor: Yup.string().required("Book author is required"),
@@ -54,25 +55,18 @@ export default observer(function CreateBookClub() {
     if (id) loadBookClub(id).then((bookClub) => setBookClub(bookClub!));
   }, [id, loadBookClub]);
 
-  // function handleSubmit() {
-  //   if (!bookClub.id) {
-  //     bookClub.id = uuid();
-  //     createBookClub(bookClub).then(() => navigate(`/bookclub/${bookClub.id}`));
-  //   } else {
-  //     updateBookClub(bookClub).then(() => navigate(`/bookclub/${bookClub.id}`));
-  //   }
-  // }
+  function handleFormSubmit(bookClub: BookClub) {
+    if (!bookClub.id) {
+      bookClub.id = uuid();
+      createBookClub(bookClub).then(() => navigate(`/bookclub/${bookClub.id}`));
+    } else {
+      updateBookClub(bookClub).then(() => navigate(`/bookclub/${bookClub.id}`));
+    }
+  }
 
   function handleCancel() {
     navigate(`/bookclub/${bookClub.id}`);
   }
-
-  // function handleChange(
-  //   event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ) {
-  //   const { name, value } = event.target;
-  //   setBookClub({ ...bookClub, [name]: value });
-  // }
 
   if (loadingInitial)
     return <LoadingComponent content="Loading book club..." />;
@@ -83,9 +77,9 @@ export default observer(function CreateBookClub() {
         validationSchema={validationSchema}
         enableReinitialize
         initialValues={bookClub}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => handleFormSubmit(values)}
       >
-        {({ handleSubmit }) => (
+        {({ handleSubmit, isValid, isSubmitting, dirty }) => (
           <Form
             className="ui form"
             onSubmit={handleSubmit}
@@ -116,10 +110,14 @@ export default observer(function CreateBookClub() {
               name="readingPace"
               label="Reading Pace"
             />
-            <CustomTextInput
-              placeholder="Next Meeting Date"
+            <Header content="Next Meeting Date" sub color="blue" />
+            <CustomDateInput
+              placeholderText="Next Meeting Date"
               name="nextMeeting"
-              label="Next Meeting Date"
+              showTimeSelect
+              timeCaption="time"
+              dateFormat="MMMM dd, yyyy - h:mm aa"
+              minDate={new Date()}
             />
             <CustomTextInput
               placeholder="Meeting Link"
@@ -139,6 +137,7 @@ export default observer(function CreateBookClub() {
             {bookClub.id ? (
               <>
                 <Button
+                  disabled={isSubmitting || !dirty || !isValid}
                   loading={loading}
                   floated="right"
                   positive
@@ -155,6 +154,7 @@ export default observer(function CreateBookClub() {
             ) : (
               <>
                 <Button
+                  disabled={isSubmitting || !dirty || !isValid}
                   loading={loading}
                   floated="right"
                   positive

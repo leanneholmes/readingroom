@@ -74,7 +74,7 @@ export default class BookClubStore {
   };
 
   private setBookClub = (bookClub: BookClub) => {
-    bookClub.nextMeeting = bookClub.nextMeeting.split("T")[0];
+    bookClub.nextMeeting = new Date(bookClub.nextMeeting!);
     this.bookClubRegistry.set(bookClub.id, bookClub);
   };
 

@@ -1,5 +1,5 @@
 export const readingPaceOptions = [
-  { text: "Slow", value: "slow" },
-  { text: "Moderate", value: "moderate" },
-  { text: "Fast", value: "fast" },
+  { text: "Slow", value: "Slow" },
+  { text: "Moderate", value: "Moderate" },
+  { text: "Fast", value: "Fast" },
 ];

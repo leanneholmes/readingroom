@@ -4,7 +4,7 @@ export interface BookClub {
   description: string;
   category: string;
   readingPace: string;
-  nextMeeting: string;
+  nextMeeting: Date | null;
   meetingLink: string;
   currentBook: string;
   currentBookAuthor: string;

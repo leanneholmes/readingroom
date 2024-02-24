@@ -5,6 +5,7 @@ import LoadingComponent from "../components/LoadingComponent";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { format } from "date-fns";
 
 export default observer(function BookClubDetails() {
   const { bookClubStore } = useStore();
@@ -38,7 +39,10 @@ export default observer(function BookClubDetails() {
       <div>
         Current Book: {bookClub.currentBook} by {bookClub.currentBookAuthor}{" "}
       </div>
-      <div>Next Meeting Date: {bookClub.nextMeeting}</div>
+      <div>
+        Next Meeting Date:{" "}
+        {format(bookClub.nextMeeting!, "MMMM dd, yyyy - h:mm aa")}
+      </div>
       <div>Meeting Link: {bookClub.meetingLink}</div>
       <Button
         as={Link}
