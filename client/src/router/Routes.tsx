@@ -1,9 +1,9 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import HomePage from "../pages/HomePage";
-import CreateBookClub from "../pages/CreateBookClub";
 import MyClubs from "../pages/MyClubs";
 import BookClubDetails from "../pages/BookClubDetails";
+import BookClubForm from "../pages/BookClubForm";
 
 export const routes: RouteObject[] = [
   {
@@ -11,9 +11,10 @@ export const routes: RouteObject[] = [
     element: <App />,
     children: [
       { path: "", index: true, element: <HomePage /> },
-      { path: "/create", element: <CreateBookClub /> },
+      { path: "/create", element: <BookClubForm /> },
       { path: "/myclubs", element: <MyClubs /> },
       { path: "/bookclub/:id", element: <BookClubDetails /> },
+      { path: "/edit/:id", element: <BookClubForm /> },
     ],
   },
 ];

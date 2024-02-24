@@ -1,9 +1,10 @@
 import { observer } from "mobx-react-lite";
-import { Container } from "semantic-ui-react";
+import { Button, Container } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 import LoadingComponent from "../components/LoadingComponent";
 import { useParams } from "react-router";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default observer(function BookClubDetails() {
   const { bookClubStore } = useStore();
@@ -11,6 +12,7 @@ export default observer(function BookClubDetails() {
     selectedBookClub: bookClub,
     loadBookClub,
     loadingInitial,
+    openForm,
   } = bookClubStore;
   const { id } = useParams();
 
@@ -30,6 +32,16 @@ export default observer(function BookClubDetails() {
       <div>
         Current Book: {bookClub.currentBook} by {bookClub.currentBookAuthor}{" "}
       </div>
+      <div>Next Meeting Date: {bookClub.nextMeeting}</div>
+      <div>Meeting Link: {bookClub.meetingLink}</div>
+      <Button
+        as={Link}
+        to={`/edit/${bookClub.id}`}
+        basic
+        color="teal"
+        content="Edit"
+      />
+      <Button as={Link} to="/" color="red" content="Delete" />
     </Container>
   );
 });

@@ -42,16 +42,30 @@ export default class BookClubStore {
     this.selectedBookClub = undefined;
   };
 
+  openForm = (id?: string) => {
+    id ? this.selectBookClub(id) : this.cancelSelectedBookClub();
+    this.editMode = true;
+  };
+
+  closeForm = () => {
+    this.editMode = false;
+  };
+
   loadBookClub = async (id: string) => {
     let bookClub = this.getBookClub(id);
-    if (bookClub) this.selectedBookClub = bookClub;
-    else {
+    if (bookClub) {
+      this.selectedBookClub = bookClub;
+      return bookClub;
+    } else {
       this.setLoadingInitial(true);
       try {
         bookClub = await agent.BookClubs.details(id);
         this.setBookClub(bookClub);
-        this.selectedBookClub = bookClub;
+        runInAction(() => {
+          this.selectedBookClub = bookClub;
+        });
         this.setLoadingInitial(false);
+        return bookClub;
       } catch (error) {
         console.log(error);
         this.setLoadingInitial(false);
