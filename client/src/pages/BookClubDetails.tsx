@@ -23,7 +23,7 @@ export default observer(function BookClubDetails() {
 
   function handleDelete() {
     deleteBookClub(bookClub!.id);
-    navigate("/");
+    navigate("/bookclubs");
   }
 
   if (loadingInitial || !bookClub) return <LoadingComponent />;
@@ -47,7 +47,7 @@ export default observer(function BookClubDetails() {
         color="teal"
         content="Edit"
       />
-      <Button onClick={handleDelete} to="/" color="red" content="Delete" />
+      <Button onClick={handleDelete} color="red" content="Delete" />
     </Container>
   );
 });

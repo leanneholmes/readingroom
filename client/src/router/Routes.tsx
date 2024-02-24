@@ -4,16 +4,17 @@ import HomePage from "../pages/HomePage";
 import MyClubs from "../pages/MyClubs";
 import BookClubDetails from "../pages/BookClubDetails";
 import BookClubForm from "../pages/BookClubForm";
+import BookClubs from "../pages/BookClubs";
 
 export const routes: RouteObject[] = [
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "", index: true, element: <HomePage /> },
+      { path: "/bookclubs", index: true, element: <BookClubs /> },
       { path: "/create", element: <BookClubForm key="create" /> },
       { path: "/myclubs", element: <MyClubs /> },
-      { path: "/bookclub/:id", element: <BookClubDetails /> },
+      { path: "/bookclubs/:id", element: <BookClubDetails /> },
       { path: "/edit/:id", element: <BookClubForm key="edit" /> },
     ],
   },

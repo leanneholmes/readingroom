@@ -51,7 +51,7 @@ export default function BookClubList({ bookClubs }: Props) {
                   />
                   <Button
                     as={Link}
-                    to={`/bookclub/${bookclub.id}`}
+                    to={`/bookclubs/${bookclub.id}`}
                     floated="right"
                     content="View Club"
                     color="blue"
