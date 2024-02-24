@@ -13,7 +13,7 @@ export const routes: RouteObject[] = [
       { path: "/bookclubs", index: true, element: <BookClubs /> },
       { path: "/create", element: <BookClubForm key="create" /> },
       { path: "/myclubs", element: <MyClubs /> },
-      { path: "/bookclubs/:id", element: <BookClubDetails /> },
+      { path: "/bookclub/:id", element: <BookClubDetails /> },
       { path: "/edit/:id", element: <BookClubForm key="edit" /> },
     ],
   },

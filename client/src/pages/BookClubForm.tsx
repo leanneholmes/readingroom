@@ -39,18 +39,14 @@ export default observer(function CreateBookClub() {
   function handleSubmit() {
     if (!bookClub.id) {
       bookClub.id = uuid();
-      createBookClub(bookClub).then(() =>
-        navigate(`/bookclubs/${bookClub.id}`)
-      );
+      createBookClub(bookClub).then(() => navigate(`/bookclub/${bookClub.id}`));
     } else {
-      updateBookClub(bookClub).then(() =>
-        navigate(`/bookclubs/${bookClub.id}`)
-      );
+      updateBookClub(bookClub).then(() => navigate(`/bookclub/${bookClub.id}`));
     }
   }
 
   function handleCancel() {
-    navigate(`/bookclubs/${bookClub.id}`);
+    navigate(`/bookclub/${bookClub.id}`);
   }
 
   function handleInputChange(
