@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Container, Form, Header, Segment } from "semantic-ui-react";
+import { Button, Form, Header, Segment } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
