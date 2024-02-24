@@ -130,7 +130,6 @@ export default observer(function CreateBookClub() {
               onClick={handleSubmit}
             />
             <Button
-              loading={loading}
               floated="right"
               color="grey"
               content="Cancel"

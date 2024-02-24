@@ -11,7 +11,8 @@ function BookClubs() {
   const { loadBookClubs, bookClubRegistry } = bookClubStore;
 
   useEffect(() => {
-    if (bookClubRegistry.size === 0) loadBookClubs();
+    loadBookClubs();
+    // if (bookClubRegistry.size === 0) loadBookClubs();
   }, [loadBookClubs]);
 
   if (bookClubStore.loadingInitial) return <LoadingComponent />;
