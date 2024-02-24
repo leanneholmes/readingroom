@@ -8,11 +8,11 @@ import { observer } from "mobx-react-lite";
 function BookClubs() {
   const { bookClubStore } = useStore();
   const { bookClubsAsMap } = bookClubStore;
+  const { loadBookClubs, bookClubRegistry } = bookClubStore;
 
   useEffect(() => {
-    bookClubStore.bookClubs = [];
-    bookClubStore.loadBookClubs();
-  }, [bookClubStore]);
+    if (bookClubRegistry.size === 0) loadBookClubs();
+  }, [loadBookClubs]);
 
   if (bookClubStore.loadingInitial) return <LoadingComponent />;
   return (

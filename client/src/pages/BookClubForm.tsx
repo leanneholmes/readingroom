@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Form, Header, Segment } from "semantic-ui-react";
+import { Button, Container, Form, Header, Segment } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
@@ -11,7 +11,6 @@ import { v4 as uuid } from "uuid";
 export default observer(function CreateBookClub() {
   const { bookClubStore } = useStore();
   const {
-    selectedBookClub,
     createBookClub,
     updateBookClub,
     loading,
@@ -48,6 +47,10 @@ export default observer(function CreateBookClub() {
         navigate(`/bookclubs/${bookClub.id}`)
       );
     }
+  }
+
+  function handleCancel() {
+    navigate(`/bookclubs/${bookClub.id}`);
   }
 
   function handleInputChange(
@@ -120,15 +123,36 @@ export default observer(function CreateBookClub() {
           value={bookClub.currentBookAuthor}
           onChange={handleInputChange}
         />
-
-        <Button
-          loading={loading}
-          floated="right"
-          positive
-          type="submit"
-          content="Submit"
-          onClick={handleSubmit}
-        />
+        {bookClub.id ? (
+          <>
+            <Button
+              loading={loading}
+              floated="right"
+              positive
+              type="submit"
+              content="Submit"
+              onClick={handleSubmit}
+            />
+            <Button
+              loading={loading}
+              floated="right"
+              color="grey"
+              content="Cancel"
+              onClick={handleCancel}
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              loading={loading}
+              floated="right"
+              positive
+              type="submit"
+              content="Create"
+              onClick={handleSubmit}
+            />
+          </>
+        )}
       </Form>
     </Segment>
   );

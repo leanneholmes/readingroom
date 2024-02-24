@@ -1,6 +1,5 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import HomePage from "../pages/HomePage";
 import MyClubs from "../pages/MyClubs";
 import BookClubDetails from "../pages/BookClubDetails";
 import BookClubForm from "../pages/BookClubForm";
