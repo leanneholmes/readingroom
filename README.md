@@ -34,7 +34,7 @@ dotnet build
 * Start the API server
 ```
 cd API
-dotnet watch --no-hot-reload
+dotnet watch
 ```
 
 * In a separate terminal, navigate to the client folder and start the client
