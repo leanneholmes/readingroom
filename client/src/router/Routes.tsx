@@ -4,8 +4,9 @@ import MyClubs from "../pages/MyClubs";
 import BookClubDetails from "../pages/BookClubDetails";
 import BookClubForm from "../pages/BookClubForm";
 import BookClubs from "../pages/BookClubs";
-import TestErrors from "../components/TestErrors";
+import TestErrors from "../components/errors/TestErrors";
 import NotFound from "../pages/NotFound";
+import ServerError from "../components/errors/ServerError";
 
 export const routes: RouteObject[] = [
   {
@@ -19,6 +20,7 @@ export const routes: RouteObject[] = [
       { path: "/edit/:id", element: <BookClubForm key="edit" /> },
       { path: "/errors", element: <TestErrors /> },
       { path: "/not-found", element: <NotFound /> },
+      { path: "/server-error", element: <ServerError /> },
       { path: "*", element: <Navigate replace to="/not-found" /> }, //Any bad URL will redirect to not found
     ],
   },
