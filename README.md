@@ -39,7 +39,6 @@ dotnet watch --no-hot-reload
 
 * In a separate terminal, navigate to the client folder and start the client
 ```
-cd ..
 cd client
 npm install
 npm start
