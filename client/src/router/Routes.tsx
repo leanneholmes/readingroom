@@ -11,10 +11,10 @@ export const routes: RouteObject[] = [
     element: <App />,
     children: [
       { path: "", index: true, element: <HomePage /> },
-      { path: "/create", element: <BookClubForm /> },
+      { path: "/create", element: <BookClubForm key="create" /> },
       { path: "/myclubs", element: <MyClubs /> },
       { path: "/bookclub/:id", element: <BookClubDetails /> },
-      { path: "/edit/:id", element: <BookClubForm /> },
+      { path: "/edit/:id", element: <BookClubForm key="edit" /> },
     ],
   },
 ];

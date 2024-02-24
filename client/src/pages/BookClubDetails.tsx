@@ -4,21 +4,27 @@ import { useStore } from "../stores/store";
 import LoadingComponent from "../components/LoadingComponent";
 import { useParams } from "react-router";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default observer(function BookClubDetails() {
   const { bookClubStore } = useStore();
+  const navigate = useNavigate();
   const {
     selectedBookClub: bookClub,
     loadBookClub,
     loadingInitial,
-    openForm,
+    deleteBookClub,
   } = bookClubStore;
   const { id } = useParams();
 
   useEffect(() => {
     if (id) loadBookClub(id);
   }, [id, loadBookClub]);
+
+  function handleDelete() {
+    deleteBookClub(bookClub!.id);
+    navigate("/");
+  }
 
   if (loadingInitial || !bookClub) return <LoadingComponent />;
 
@@ -41,7 +47,7 @@ export default observer(function BookClubDetails() {
         color="teal"
         content="Edit"
       />
-      <Button as={Link} to="/" color="red" content="Delete" />
+      <Button onClick={handleDelete} to="/" color="red" content="Delete" />
     </Container>
   );
 });
