@@ -52,9 +52,10 @@ dotnet restore
 dotnet build
 ```
 
-If you want to remove all test data and start with a new set, run the following from the project directory
+If you want to remove all test data and start with a fresh set, run the following from the project level directory
 ```
-dotnet ef database -drop -s API -p Persistence
+dotnet tool install --global dotnet-ef --version 7.0.2
+dotnet ef database drop -s API -p Persistence
 ```
 Hit y to confirm. Then, cd to the /API folder and start the server again 
 ```
