@@ -40,7 +40,7 @@ dotnet watch
 * In a separate terminal, navigate to the client folder and start the client
 ```
 cd client
-npm install
+npm install --legacy-peer-deps
 npm start
 ```
 
