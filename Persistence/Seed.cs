@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.VisualBasic;
 
 namespace Persistence
 {
@@ -16,12 +11,12 @@ namespace Persistence
             {
                 var users = new List<AppUser>
                 {
-                    new AppUser{DisplayName = "test", UserName = "test@test.com", Email = "test@test.com"},
-                    new AppUser{DisplayName = "Deanna", UserName = "deanna@test.com", Email = "deanna@test.com"},
-                    new AppUser{DisplayName = "Leanne", UserName = "leanne@test.com", Email = "leanne@test.com"},
-                    new AppUser{DisplayName = "Brian", UserName = "brian@test.com", Email = "brian@test.com"},
-                    new AppUser{DisplayName = "Set", UserName = "set@test.com", Email = "set@test.com"},
-                    new AppUser{DisplayName = "Aryan", UserName = "aryan@test.com", Email = "aryan@test.com"},
+                    new AppUser{DisplayName = "test", UserName = "testuser", Email = "test@test.com"},
+                    new AppUser{DisplayName = "Deanna", UserName = "deanna", Email = "deanna@test.com"},
+                    new AppUser{DisplayName = "Leanne", UserName = "leanne", Email = "leanne@test.com"},
+                    new AppUser{DisplayName = "Brian", UserName = "brian", Email = "brian@test.com"},
+                    new AppUser{DisplayName = "Set", UserName = "set", Email = "set@test.com"},
+                    new AppUser{DisplayName = "Aryan", UserName = "aryan", Email = "aryan@test.com"},
                 };
 
                 foreach (var user in users)
