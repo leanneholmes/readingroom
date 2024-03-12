@@ -2,17 +2,18 @@ import { useField } from "formik";
 import { Form, Header, Label } from "semantic-ui-react";
 
 interface Props {
-  placeholder: string;
+  placeholder?: string;
   name: string;
   label?: string;
   type?: string;
+  id?: string;
 }
 
 export default function CustomTextInput(props: Props) {
   const [field, meta] = useField(props.name);
   return (
     <Form.Field error={meta.touched && !!meta.error}>
-      <Header content={props.label} sub color="blue" />
+      <Header as="h4" content={props.label} className="form-label" />
       <input {...field} {...props} />
       {meta.touched && meta.error ? (
         <Label basic color="red">

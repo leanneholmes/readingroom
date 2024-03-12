@@ -34,14 +34,25 @@ export default observer(function RegsiterForm() {
           autoComplete="off"
           placeholder={undefined}
         >
-          <Header as="h2">Register Form</Header>
-          <CustomTextInput placeholder="Display Name" name="displayName" />
-          <CustomTextInput placeholder="Username" name="username" />
-          <CustomTextInput placeholder="Email" name="email" />
+          <Header as="h2" textAlign="center">
+            Create an Account
+          </Header>
+          <CustomTextInput
+            placeholder="Display Name"
+            name="displayName"
+            id="displayName"
+          />
+          <CustomTextInput
+            placeholder="Username"
+            name="username"
+            id="username"
+          />
+          <CustomTextInput placeholder="Email" name="email" id="email" />
           <CustomTextInput
             placeholder="Password"
             name="password"
             type="password"
+            id="password"
           />
           <ErrorMessage
             name="error"
@@ -52,9 +63,11 @@ export default observer(function RegsiterForm() {
           <Button
             disabled={!isValid || !dirty || isSubmitting}
             loading={isSubmitting}
+            className="btn-dark-green"
             positive
-            content="Register"
+            content="Sign Up"
             type="submit"
+            id="submit"
             fluid
           />
         </Form>

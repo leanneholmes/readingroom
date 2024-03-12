@@ -1,7 +1,88 @@
-.ui.top.fixed.menu {
-  background-color: #f2f2f2;
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+* {
+  font-family: "Nunito Sans";
+}
+
+.playfair {
+  font-family: "Playfair Display" !important;
+}
+
+input,
+textarea {
+  background-color: #f3f4f6 !important;
+  border: none !important;
+  font-family: "Nunito Sans" !important;
+}
+
+.form-label {
+  color: #2a365a !important;
+  margin-bottom: 3px !important;
+}
+
+.btn-dark-green {
+  background-color: #06282d !important;
+  &:hover {
+    background-color: #08353c !important;
+  }
+}
+
+.btn-dark-blue {
+  background-color: #414d72 !important;
+  &:hover {
+    background-color: #4c5b87 !important;
+  }
+}
+
+.btn-dark-red {
+  background-color: #ba1d2c !important;
+  &:hover {
+    background-color: #ca2131 !important;
+  }
+}
+
+.navbar {
+  background-color: #06282d !important;
+}
+
+.navbar .item.active {
+  border-bottom: 2px solid white !important;
+  padding-bottom: 5px !important;
+  margin-bottom: 7px !important;
+}
+
+.navbar .item {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}
+
+.header.item {
+  font-weight: 400 !important;
+  font-size: 15pt !important;
+  position: relative;
+  top: 6px !important;
+  margin-right: 20px !important;
 }
 
 .react-datepicker-wrapper {
   width: 100%;
+}
+
+.login-image {
+  background-image: url("/assets/landing.jpg");
+  background-size: cover;
+}
+
+.pagination {
+  text-align: center;
 }

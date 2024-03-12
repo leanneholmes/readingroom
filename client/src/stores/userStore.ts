@@ -8,7 +8,7 @@ export default class UserStore {
   user: User | null = null;
 
   constructor() {
-    makeAutoObservable;
+    makeAutoObservable(this);
   }
 
   get isLoggedIn() {
@@ -45,5 +45,13 @@ export default class UserStore {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  setImage = (image: string) => {
+    if (this.user) this.user.image = image;
+  };
+
+  setDisplayName = (name: string) => {
+    if (this.user) this.user.displayName = name;
   };
 }

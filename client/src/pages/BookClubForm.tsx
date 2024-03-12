@@ -4,7 +4,7 @@ import { Button, Header, Segment } from "semantic-ui-react";
 import { useStore } from "../stores/store";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
-import { BookClub } from "../models/bookclub";
+import { BookClubFormValues } from "../models/bookclub";
 import LoadingComponent from "../components/LoadingComponent";
 import { v4 as uuid } from "uuid";
 import { Formik, Form } from "formik";
@@ -18,32 +18,19 @@ import CustomDateInput from "../components/form/CustomDateInput";
 
 export default observer(function CreateBookClub() {
   const { bookClubStore } = useStore();
-  const {
-    createBookClub,
-    updateBookClub,
-    loading,
-    loadBookClub,
-    loadingInitial,
-  } = bookClubStore;
+  const { createBookClub, updateBookClub, loadBookClub, loadingInitial } =
+    bookClubStore;
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [bookClub, setBookClub] = useState<BookClub>({
-    id: "",
-    name: "",
-    description: "",
-    category: "",
-    readingPace: "",
-    nextMeeting: null,
-    meetingLink: "",
-    currentBook: "",
-    currentBookAuthor: "",
-  });
+  const [bookClub, setBookClub] = useState<BookClubFormValues>(
+    new BookClubFormValues()
+  );
 
   const validationSchema = Yup.object({
     name: Yup.string().required("The book club name is required"),
     description: Yup.string().required("The book club description is required"),
-    category: Yup.string().required("Club category is required"),
+    category: Yup.string().required("Club genre is required"),
     readingPace: Yup.string().required("Reading pace is required"),
     nextMeeting: Yup.string().required("Meeting date is required").nullable(),
     meetingLink: Yup.string().required("A meeting link is required"),
@@ -52,10 +39,13 @@ export default observer(function CreateBookClub() {
   });
 
   useEffect(() => {
-    if (id) loadBookClub(id).then((bookClub) => setBookClub(bookClub!));
+    if (id)
+      loadBookClub(id).then((bookClub) =>
+        setBookClub(new BookClubFormValues(bookClub))
+      );
   }, [id, loadBookClub]);
 
-  function handleFormSubmit(bookClub: BookClub) {
+  function handleFormSubmit(bookClub: BookClubFormValues) {
     if (!bookClub.id) {
       bookClub.id = uuid();
       createBookClub(bookClub).then(() => navigate(`/bookclub/${bookClub.id}`));
@@ -72,100 +62,128 @@ export default observer(function CreateBookClub() {
     return <LoadingComponent content="Loading book club..." />;
 
   return (
-    <Segment clearing>
-      <Formik
-        validationSchema={validationSchema}
-        enableReinitialize
-        initialValues={bookClub}
-        onSubmit={(values) => handleFormSubmit(values)}
-      >
-        {({ handleSubmit, isValid, isSubmitting, dirty }) => (
-          <Form
-            className="ui form"
-            onSubmit={handleSubmit}
-            autoComplete="off"
-            placeholder={undefined}
-          >
-            <CustomTextInput
-              name="name"
-              placeholder="Name"
-              label="Book Club Name"
-            />
-            <CustomTextArea
-              rows={3}
-              name="description"
-              placeholder="Description"
-              label="Club Description"
-            />
+    <>
+      {bookClub.id ? (
+        <Header as="h1" className="playfair">
+          Edit Book Club
+        </Header>
+      ) : (
+        <Header as="h1" className="playfair">
+          Create a Book Club
+        </Header>
+      )}
+      <Segment clearing style={{ marginTop: "20px" }}>
+        <Formik
+          validationSchema={validationSchema}
+          enableReinitialize
+          initialValues={bookClub}
+          onSubmit={(values) => handleFormSubmit(values)}
+        >
+          {({ handleSubmit, isValid, isSubmitting, dirty }) => (
+            <Form
+              className="ui form"
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              placeholder={undefined}
+            >
+              <CustomTextInput
+                name="name"
+                placeholder="Name"
+                label="Book Club Name"
+                id="name"
+              />
+              <CustomTextArea
+                rows={3}
+                name="description"
+                placeholder="Description"
+                label="Club Description"
+                id="description"
+              />
 
-            <CustomSelectInput
-              options={categoryOptions}
-              placeholder="Category"
-              name="category"
-              label="Category"
-            />
-            <CustomSelectInput
-              options={readingPaceOptions}
-              placeholder="Reading Pace"
-              name="readingPace"
-              label="Reading Pace"
-            />
-            <Header content="Next Meeting Date" sub color="blue" />
-            <CustomDateInput
-              placeholderText="Next Meeting Date"
-              name="nextMeeting"
-              showTimeSelect
-              timeCaption="time"
-              dateFormat="MMMM dd, yyyy - h:mm aa"
-              minDate={new Date()}
-            />
-            <CustomTextInput
-              placeholder="Meeting Link"
-              name="meetingLink"
-              label="Meeting Link"
-            />
-            <CustomTextInput
-              placeholder="Current Book"
-              name="currentBook"
-              label="Current Book"
-            />
-            <CustomTextInput
-              placeholder="Book Author"
-              name="currentBookAuthor"
-              label="Book Author"
-            />
-            {bookClub.id ? (
-              <>
-                <Button
-                  disabled={isSubmitting || !dirty || !isValid}
-                  loading={loading}
-                  floated="right"
-                  positive
-                  type="submit"
-                  content="Submit"
-                />
-                <Button
-                  floated="right"
-                  color="grey"
-                  content="Cancel"
-                  onClick={handleCancel}
-                />
-              </>
-            ) : (
-              <>
-                <Button
-                  disabled={isSubmitting || !dirty || !isValid}
-                  loading={loading}
-                  floated="right"
-                  positive
-                  type="submit"
-                  content="Create"
-                />
-              </>
-            )}
-          </Form>
-        )}
-      </Formik>
-    </Segment>
+              <CustomSelectInput
+                options={categoryOptions}
+                placeholder="Genre"
+                name="category"
+                label="Genre"
+                id="category"
+              />
+              <CustomSelectInput
+                options={readingPaceOptions}
+                placeholder="Reading Pace"
+                name="readingPace"
+                label="Reading Pace"
+                id="readingPace"
+              />
+              <Header
+                as="h4"
+                content="Next Meeting Date"
+                className="form-label"
+              />
+              <CustomDateInput
+                placeholderText="Next Meeting Date"
+                name="nextMeeting"
+                showTimeSelect
+                timeCaption="time"
+                dateFormat="MMMM dd, yyyy - h:mm aa"
+                minDate={new Date()}
+                id="nextMeeting"
+              />
+              <CustomTextInput
+                placeholder="Meeting Link"
+                name="meetingLink"
+                label="Meeting Link"
+                id="meetingLink"
+              />
+              <CustomTextInput
+                placeholder="Current Book"
+                name="currentBook"
+                label="Current Book"
+                id="currentBook"
+              />
+              <CustomTextInput
+                placeholder="Book Author"
+                name="currentBookAuthor"
+                label="Book Author"
+                id="bookAuthor"
+              />
+              {bookClub.id ? (
+                <>
+                  <Button
+                    disabled={isSubmitting || !dirty || !isValid}
+                    loading={isSubmitting}
+                    floated="right"
+                    positive
+                    className="btn-dark-green"
+                    type="submit"
+                    content="Submit"
+                    id="submit"
+                  />
+                  <Button
+                    floated="right"
+                    color="grey"
+                    content="Cancel"
+                    onClick={handleCancel}
+                    id="cancel"
+                  />
+                </>
+              ) : (
+                <>
+                  <Button
+                    disabled={isSubmitting || !dirty || !isValid}
+                    loading={isSubmitting}
+                    floated="right"
+                    positive
+                    type="submit"
+                    className="btn-dark-green"
+                    content="Create"
+                    id="create"
+                  />
+                </>
+              )}
+            </Form>
+          )}
+        </Formik>
+      </Segment>
+    </>
   );
 });

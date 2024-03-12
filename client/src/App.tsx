@@ -1,6 +1,6 @@
 import { Container } from "semantic-ui-react";
 import NavBar from "./components/NavBar";
-import { Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import { ToastContainer } from "react-toastify";
 import { useStore } from "./stores/store";
@@ -23,6 +23,11 @@ function App() {
 
   if (!commonStore.appLoaded)
     return <LoadingComponent content="Loading app..." />;
+
+  if (!commonStore.token && location.pathname !== "/") {
+    // Redirect unauthenticated users to the home page ("/")
+    return <Navigate to="/" />;
+  }
 
   return (
     <>

@@ -8,7 +8,9 @@ export default observer(function LoginForm() {
   const { userStore } = useStore();
   return (
     <>
-      <Header as="h2">Login Form</Header>
+      <Header as="h2" textAlign="center">
+        Sign In
+      </Header>
       <Formik
         initialValues={{ email: "", password: "", error: null }}
         onSubmit={(values, { setErrors }) =>
@@ -28,12 +30,14 @@ export default observer(function LoginForm() {
               placeholder="Email"
               name="email"
               label="Email Address"
+              id="email"
             />
             <CustomTextInput
               placeholder="Password"
               name="password"
               label="Password"
               type="password"
+              id="password"
             />
             <ErrorMessage
               name="error"
@@ -48,9 +52,11 @@ export default observer(function LoginForm() {
             />
             <Button
               loading={isSubmitting}
+              className="btn-dark-green"
               positive
-              content="Login"
+              content="Sign In"
               type="submit"
+              id="submit"
               fluid
             />
           </Form>

@@ -7,6 +7,7 @@ import BookClubs from "../pages/BookClubs";
 import TestErrors from "../components/errors/TestErrors";
 import NotFound from "../pages/NotFound";
 import ServerError from "../components/errors/ServerError";
+import ProfilePage from "../pages/ProfilePage";
 
 export const routes: RouteObject[] = [
   {
@@ -18,6 +19,7 @@ export const routes: RouteObject[] = [
       { path: "/myclubs", element: <MyClubs /> },
       { path: "/bookclub/:id", element: <BookClubDetails /> },
       { path: "/edit/:id", element: <BookClubForm key="edit" /> },
+      { path: "/profiles/:username", element: <ProfilePage /> },
       { path: "/errors", element: <TestErrors /> },
       { path: "/not-found", element: <NotFound /> },
       { path: "/server-error", element: <ServerError /> },

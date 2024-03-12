@@ -4,7 +4,7 @@ An application where users can join or create book clubs.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+To fill out
 
 ## Getting Started
 
@@ -15,34 +15,72 @@ An in-depth paragraph about your project and overview of use.
   - https://dotnet.microsoft.com/en-us/download/dotnet/7.0 
 * Node 16.0 or higher
   - https://nodejs.org/en
+ 
+### Initial Setup 
+When you first clone the repo, run through these steps. 
 
-### Installing
+Add a file to the /API folder called **appsettings.json** and populate it with the following code: 
+```
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "Cloudinary": {
+    "CloudName": "dicszxcqo",
+    "ApiKey": "287649759218743",
+    "ApiSecret": "vaJiPE0neUwyyz_ij6YKn7DCy_E"
+  }
+}
+```
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders (.env files will need to be included here)
+Installing this tool is optional, but required if you want to clear out the local database. Run this command from the project level directory /ReadingRoom
+```
+dotnet tool install --global dotnet-ef --version 7.0.2
+```
+
+**ENV file instructions will be added here later**
 
 ### Executing program
 
 These instructions are for running the program locally.
-* Clone the repo and cd into the project folder
+* cd into the project folder and build the project
 ```
-git clone https://github.com/leanneholmes/readingroom.git
 cd readingroom
 dotnet build
 ```
 
-* Start the API server
+
+
+* From a terminal in the API folder, start the server
 ```
 cd API
 dotnet watch
 ```
 
-* In a separate terminal, navigate to the client folder and start the client
+* In a separate terminal, navigate to the client folder and start the client. Note the --legacy-peer-deps flag is required
 ```
 cd client
 npm install --legacy-peer-deps
 npm start
 ```
+
+In a browser, navigate to http://localhost:3000/ to view the app. 
+
+### Test Data 
+The following users will be populated into the database and can be used for test purposes:
+| E-mail | Username | Password |
+| --- | --- | --- |
+| test@test.com | testuser | Pa$$w0rd |
+| deanna@test.com | deanna | Pa$$w0rd |
+| set@test.com | set | Pa$$w0rd |
+| aryan@test.com | aryan | Pa$$w0rd |
+| brian@test.com | brian | Pa$$w0rd |
+| leanne@test.com | leanne | Pa$$w0rd |
 
 ## Help
 
@@ -52,9 +90,9 @@ dotnet restore
 dotnet build
 ```
 
-If you want to remove all test data and start with a new set, run the following from the project directory
+If you want to remove all of the extra test data you've added and start with a fresh set, stop the server and run this command from the project level directory
 ```
-dotnet ef database -drop -s API -p Persistence
+dotnet ef database drop -s API -p Persistence
 ```
 Hit y to confirm. Then, cd to the /API folder and start the server again 
 ```
@@ -64,22 +102,15 @@ dotnet watch
 
 ## Authors
 
-Contributors names and contact info
-
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+To fill out
 
 ## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
+To fill out
 
 ## License
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+To fill out
 
 ## Acknowledgments
 

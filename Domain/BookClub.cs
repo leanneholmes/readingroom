@@ -19,5 +19,11 @@ namespace Domain
         public string CurrentBook { get; set; }
 
         public string CurrentBookAuthor { get; set; }
+
+        public ICollection<BookClubMember> Members { get; set; } = new List<BookClubMember>();
+
+        public Photo Logo {get; set;}
+        
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

@@ -1,7 +1,9 @@
 using Application.Core;
+using Application.Interfaces;
 using Domain;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.BookClubs
@@ -24,13 +26,26 @@ namespace Application.BookClubs
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {
         private readonly DataContext _context;
-            public Handler(DataContext context)
+        private readonly IUserAccessor _userAccessor;
+            public Handler(DataContext context, IUserAccessor userAccessor)
             {
+            _userAccessor = userAccessor;
             _context = context;
             }
 
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
+
+                var member = new BookClubMember
+                {
+                    AppUser = user,
+                    BookClub = request.BookClub,
+                    IsOwner = true,
+                };
+
+                request.BookClub.Members.Add(member);
+
                 _context.BookClubs.Add(request.BookClub);
 
                 var result = await _context.SaveChangesAsync() > 0;
